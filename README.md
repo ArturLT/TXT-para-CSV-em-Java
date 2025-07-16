@@ -25,15 +25,6 @@ IDE Java (como Eclipse, IntelliJ IDEA ou VS Code com extensões Java).
 Configuração e Execução
 Clone o Repositório (ou baixe os arquivos diretamente):
 
-Bash
-
-git clone https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
-cd SEU_REPOSITORIO
-(Substitua SEU_USUARIO e SEU_REPOSITORIO pelos seus dados)
-
-Abra o Projeto na sua IDE:
-Importe o projeto para sua IDE Java favorita.
-
 Crie seu Arquivo de Entrada TXT:
 No mesmo diretório onde você vai rodar o programa (ou em um caminho que você possa informar), crie um arquivo .txt (por exemplo, produtos.txt).
 Cada linha do arquivo deve seguir o formato NomeDoProduto,Preco,Quantidade.
