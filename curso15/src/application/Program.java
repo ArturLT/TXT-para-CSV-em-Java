@@ -81,11 +81,16 @@ public class Program {
              System.out.println("\nProcessamento concluído com sucesso!");
              System.out.println("Arquivo CSV de saída criado em: " + outputCsvFilePath);
 			
-			sc.close();
 		}
-		catch(IOException e) {
-			System.out.println("Erro: " + e.getMessage());
-		}
+        catch (IOException e) {
+        	System.err.println("Erro de E/S (leitura/escrita de arquivo): " + e.getMessage());
+        } catch (NumberFormatException e) {
+        	System.err.println("Erro de formato de número em uma linha. Verifique se preço e quantidade são válidos: " + e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+        	System.err.println("Erro: Linha com formato inesperado. Verifique se os campos estão separados por vírgula: " + e.getMessage());
+        } finally {
+        	sc.close(); 
+        }
 		
 	}
 
