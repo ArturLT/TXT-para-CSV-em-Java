@@ -38,19 +38,48 @@ public class Program {
         } else {
             System.out.println("Pasta 'out' já existe: " + outFolderPathStr);
         }
+        
+        String outputCsvFilePath = outFolderPathStr + File.separator + "summary.csv";
 		
-		try(BufferedReader br = new BufferedReader(new FileReader(strPath))){
-			String line = br.readLine();
-			line = br.readLine();
-			
-			while (line != null) {
-					String[] vect = line.split(",");
-					String name = vect[0];
-					Double price = Double.parseDouble(vect[1]);
-					Integer qte = Integer.parseInt(vect[2]);
-					Product prod = new Product(name, price, qte);
-					line = br.readLine();
-			}
+        try (BufferedReader br = new BufferedReader(new FileReader(strPath));
+                BufferedWriter bw = new BufferedWriter(new FileWriter(outputCsvFilePath))) {
+
+              
+               bw.write("Produto,ValorTotalVendido");
+               bw.newLine(); 
+
+               String line = br.readLine();
+
+               // Se o seu TXT tem um cabeçalho 
+               // if (line != null && line.contains("Nome") && line.contains("Preco") && line.contains("Quantidade")) {
+               //    line = br.readLine(); // Pula o cabeçalho
+               // }
+
+
+               while (line != null) {
+                   if (!line.trim().isEmpty()) { 
+                       String[] vect = line.split(",");
+
+                       // Garante que a linha tem os 3 elementos esperados
+                       if (vect.length >= 3) {
+                           String name = vect[0].trim(); 
+                           Double price = Double.parseDouble(vect[1].trim());
+                           Integer qte = Integer.parseInt(vect[2].trim());
+
+                          
+                           Double totalVendido = price * qte;
+
+                           
+                           bw.write(name + "," + String.format("%.2f", totalVendido)); 
+                           bw.newLine(); 
+                       } else {
+                           System.out.println("Aviso: Linha ignorada por formato inválido (menos de 3 colunas): " + line);
+                       }
+                   }
+                   line = br.readLine(); 
+               }
+             System.out.println("\nProcessamento concluído com sucesso!");
+             System.out.println("Arquivo CSV de saída criado em: " + outputCsvFilePath);
 			
 			sc.close();
 		}
