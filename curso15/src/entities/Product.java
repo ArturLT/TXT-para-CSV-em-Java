@@ -42,6 +42,10 @@ public class Product implements Serializable{
 		this.quantity = quantity;
 	}
 
+	public double total() {
+		return price * quantity;
+	}
+	
 	@Override
 	public String toString() {
 		return  name + " " + price + " " + quantity ;
